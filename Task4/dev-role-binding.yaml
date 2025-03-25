@@ -4,8 +4,8 @@ metadata:
   name: read-pods
   namespace: development
 subjects:
-- kind: User
-  name: developer
+- kind: Group
+  name: developer-group
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
