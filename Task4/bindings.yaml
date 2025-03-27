@@ -1,0 +1,67 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: development
+subjects:
+- kind: Group
+  name: developer-group
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: dev-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devops-access
+  namespace: development
+subjects:
+- kind: Group
+  name: devops-group
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: devops-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-read-pods
+subjects:
+- kind: Group
+  name: monitoring-group
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-reader
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-deploy-pods
+subjects:
+- kind: Group
+  name: operator-group
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-operator
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-secrets
+  namespace: secure-space
+subjects:
+- kind: User
+  name: secure-operator
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: secret-reader
+  apiGroup: rbac.authorization.k8s.io
